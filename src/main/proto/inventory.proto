@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.smartfactory.proto";
+option java_outer_classname = "InventoryProto";
+
+package inventory;
+
+// Inventory Service
+service InventoryService {
+  // Server streaming RPC - stream current inventory
+  rpc GetInventoryStream(InventoryRequest) returns (stream InventoryStatus);
+}
+
+// Request message
+message InventoryRequest {
+  string warehouse_id = 1;
+}
+
+// Inventory item message
+message InventoryStatus {
+  string item_id = 1;
+  string item_name = 2;
+  int32 quantity = 3;
+  string status = 4;
+  string timestamp = 5;
+}
+
